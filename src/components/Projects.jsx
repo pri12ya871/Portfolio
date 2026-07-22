@@ -532,7 +532,7 @@ export default function Projects() {
           transition={{ delay: 0.25 }}
           className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14"
         >
-          <Counter target="5+" label="Projects Completed" />
+          <Counter target="15+" label="Projects Completed" />
           <Counter target="1+" label="Open Source Contributions" />
           <Counter target="25+" label="Technologies Used" />
           <Counter target="Multiple" label="GitHub Repositories" />
