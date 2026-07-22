@@ -7,10 +7,10 @@ export default function Loader({ onComplete }) {
 
   useEffect(() => {
     const steps = [
-      { target: 30, delay: 200 },
-      { target: 60, delay: 600 },
-      { target: 85, delay: 1200 },
-      { target: 100, delay: 2000 },
+      { target: 40, delay: 100 },
+      { target: 70, delay: 300 },
+      { target: 90, delay: 550 },
+      { target: 100, delay: 750 },
     ];
 
     let timeouts = [];
@@ -22,8 +22,8 @@ export default function Loader({ onComplete }) {
 
     const done = setTimeout(() => {
       setDone(true);
-      setTimeout(onComplete, 600);
-    }, 2800);
+      setTimeout(onComplete, 450);
+    }, 850);
     timeouts.push(done);
 
     return () => timeouts.forEach(clearTimeout);

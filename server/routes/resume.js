@@ -10,7 +10,7 @@ const router = Router();
  * Streams the resume PDF for download.
  */
 router.get('/', (req, res) => {
-  const file = path.resolve(__dirname, '../../public/PRIYA_SOFTWARE_RESUME.pdf');
+  const file = path.resolve(__dirname, '../../public/Priya_Sharma_Resume.pdf');
   res.download(file, 'Priya_Sharma_Resume.pdf', err => {
     if (err) {
       console.error('[resume] Download failed:', err);

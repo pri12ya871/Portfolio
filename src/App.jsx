@@ -37,7 +37,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 3200);
+    // Safety backstop only — the Loader itself finishes in ~1.3s
+    const t = setTimeout(() => setLoading(false), 1600);
     return () => clearTimeout(t);
   }, []);
 

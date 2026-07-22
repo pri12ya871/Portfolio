@@ -6,7 +6,7 @@ import {
 } from 'react-icons/hi';
 import { FiFileText } from 'react-icons/fi';
 
-const RESUME_PDF = '/PRIYA_SOFTWARE_RESUME.pdf';
+const RESUME_PDF = '/Priya_Sharma_Resume.pdf';
 
 /* ── Ripple Button ── */
 function RippleButton({ children, onClick, href, download, variant = 'primary', icon, className = '' }) {

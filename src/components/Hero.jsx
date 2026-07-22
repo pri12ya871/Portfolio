@@ -1,9 +1,9 @@
-import { useRef, useState, useCallback, useMemo } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef, useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 import { HiDownload, HiMail } from 'react-icons/hi';
 import { BsFillGrid3X3GapFill } from 'react-icons/bs';
-import heroImg from '../assets/img.jpeg';
+import GirlCoding from './GirlCoding';
 
 /* ─────────────────────────────────────────
    KEYWORD HIGHLIGHT
@@ -200,148 +200,39 @@ function CTAButton({ children, href, variant = 'primary', icon }) {
 }
 
 /* ─────────────────────────────────────────
-   HERO IMAGE
-   • Tall portrait card (4:5 ratio) instead of a forced circle
-     so the full face + shoulders are always visible
-   • Rotated gradient border frame
-   • Floating glow blobs behind it
-   • Gentle float + 3-D parallax on mouse move
-   • Hover zoom on the photo itself
+   HERO VISUAL
+   • Simple static round frame — no rings,
+     no floating, no tilt
+   • Animated girl-coding illustration inside
 ───────────────────────────────────────── */
 function HeroImage() {
-  const containerRef = useRef(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 40, damping: 18, mass: 1 });
-  const sy = useSpring(my, { stiffness: 40, damping: 18, mass: 1 });
-  const rx = useTransform(sy, [-180, 180], [4, -4]);
-  const ry = useTransform(sx, [-180, 180], [-4, 4]);
-
-  const onMove = useCallback(e => {
-    const r = containerRef.current?.getBoundingClientRect();
-    if (!r) return;
-    mx.set(e.clientX - r.left - r.width / 2);
-    my.set(e.clientY - r.top - r.height / 2);
-  }, [mx, my]);
-
-  const onLeave = useCallback(() => { mx.set(0); my.set(0); }, [mx, my]);
-
-  /* Portrait dimensions: width × (5/4) tall */
-  const W = 'clamp(280px, 32vw, 420px)';
-  const H = 'clamp(350px, 40vw, 525px)';
-
+  const S = 'clamp(280px, 30vw, 400px)';
   return (
     <motion.div
-      ref={containerRef}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-      className="relative flex items-center justify-center"
-      style={{ width: W, flexShrink: 0 }}
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      style={{
+        width: S,
+        height: S,
+        flexShrink: 0,
+        borderRadius: '50%',
+        padding: 4,
+        background: 'linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #7C3AED 100%)',
+        boxShadow: '0 20px 60px rgba(124,58,237,0.35), 0 0 50px rgba(168,85,247,0.15)',
+      }}
     >
-      {/* ── Ambient glow blobs ── */}
-      <motion.div
-        animate={{ scale: [1, 1.22, 1], opacity: [0.18, 0.28, 0.18] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute rounded-full blur-3xl pointer-events-none"
+      <div
         style={{
-          width: '130%', height: '100%',
-          background: 'radial-gradient(ellipse, rgba(37,99,235,0.55) 0%, rgba(124,58,237,0.18) 55%, transparent 70%)',
-        }}
-      />
-      <motion.div
-        animate={{ scale: [1.1, 1, 1.1], opacity: [0.12, 0.22, 0.12] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}
-        className="absolute rounded-full blur-3xl pointer-events-none"
-        style={{
-          width: '100%', height: '80%',
-          background: 'radial-gradient(ellipse, rgba(6,182,212,0.4) 0%, transparent 65%)',
-        }}
-      />
-
-      {/* ── Spinning gradient ring ── */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-        className="absolute pointer-events-none"
-        style={{
-          width: 'calc(100% + 12px)',
-          height: `calc(${H} + 12px)`,
-          borderRadius: 28,
-          background: 'conic-gradient(from 0deg, #2563EB 0%, #06B6D4 28%, #7C3AED 55%, transparent 75%, #2563EB 100%)',
-          padding: '1.5px',
+          width: '100%',
+          height: '100%',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          background: '#12081F',
         }}
       >
-        <div className="w-full h-full" style={{ borderRadius: 26, background: '#050816' }} />
-      </motion.div>
-
-      {/* ── Slow counter-spin dashed ring ── */}
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-        className="absolute pointer-events-none"
-        style={{
-          width: 'calc(100% + 30px)',
-          height: `calc(${H} + 30px)`,
-          borderRadius: 34,
-          border: '1px dashed rgba(6,182,212,0.16)',
-        }}
-      />
-
-      {/* ── 3-D tilt + float + photo ── */}
-      <motion.div
-        style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d', perspective: 1000 }}
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative z-10"
-      >
-        {/* Photo card */}
-        <motion.div
-          whileHover={{ scale: 1.025 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            width: W,
-            height: H,
-            borderRadius: 24,
-            overflow: 'hidden',
-            boxShadow: [
-              '0 0 0 2px rgba(37,99,235,0.55)',
-              '0 0 0 6px rgba(6,182,212,0.1)',
-              '0 0 0 11px rgba(37,99,235,0.04)',
-              '0 28px 80px rgba(37,99,235,0.48)',
-              '0 0 90px rgba(6,182,212,0.16)',
-            ].join(', '),
-          }}
-        >
-          <img
-            src={heroImg}
-            alt="Priya Sharma — Software Engineer"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              /* Pull image up so face is well-centred in the frame */
-              objectPosition: 'center 18%',
-              display: 'block',
-              transition: 'transform 0.55s cubic-bezier(0.22,1,0.36,1)',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
-          />
-          {/* Subtle depth vignette */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: [
-                'linear-gradient(180deg, rgba(5,8,22,0.08) 0%, transparent 30%)',
-                'linear-gradient(0deg,   rgba(5,8,22,0.18) 0%, transparent 35%)',
-              ].join(', '),
-            }}
-          />
-        </motion.div>
-      </motion.div>
+        <GirlCoding />
+      </div>
     </motion.div>
   );
 }
@@ -381,13 +272,13 @@ export default function Hero() {
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 pb-12">
 
           {/*
-            DESKTOP: text LEFT (order-1) | image RIGHT (order-2)
-            MOBILE:  image TOP (order-1) | text BOTTOM (order-2)
+            DESKTOP: text LEFT | illustration RIGHT
+            MOBILE:  intro text FIRST, illustration below
           */}
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14 min-h-[calc(100vh-9rem)]">
 
-            {/* ── TEXT — left on desktop, bottom on mobile ── */}
-            <div className="flex-1 flex flex-col justify-center order-2 lg:order-1">
+            {/* ── TEXT — left on desktop, FIRST on mobile ── */}
+            <div className="flex-1 flex flex-col justify-center order-1">
 
               {/* Status badge */}
               <motion.div
@@ -478,7 +369,7 @@ export default function Hero() {
                 transition={{ duration: 0.55, delay: 0.6 }}
                 className="flex flex-wrap gap-3 mb-8"
               >
-                <CTAButton href="/PRIYA_SOFTWARE_RESUME.pdf" variant="primary" icon={<HiDownload />}>
+                <CTAButton href="/Priya_Sharma_Resume.pdf" variant="primary" icon={<HiDownload />}>
                   Download Resume
                 </CTAButton>
                 <CTAButton href="#contact" variant="secondary" icon={<HiMail />}>
@@ -530,8 +421,8 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* ── IMAGE — right on desktop, top on mobile ── */}
-            <div className="flex-shrink-0 flex items-center justify-center order-1 lg:order-2">
+            {/* ── ILLUSTRATION — right on desktop, after text on mobile ── */}
+            <div className="flex-shrink-0 flex items-center justify-center order-2">
               <HeroImage />
             </div>
           </div>
