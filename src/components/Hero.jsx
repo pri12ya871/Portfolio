@@ -77,19 +77,19 @@ export default function Hero() {
         </div>
 
         <motion.figure
-          className="order-1 lg:order-2 m-0 relative mx-auto w-full max-w-[300px] sm:max-w-[400px] lg:max-w-none"
+          className="order-1 lg:order-2 m-0 relative mx-auto lg:mr-0 w-full max-w-[200px] sm:max-w-[240px] lg:max-w-[300px]"
           initial={{ opacity: 0, y: 24, rotate: 1.5 }}
           animate={{ opacity: 1, y: 0, rotate: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="portrait" style={{ aspectRatio: '4 / 5' }}>
+          <div className="portrait" style={{ aspectRatio: '1 / 1' }}>
             <img
               src={portrait}
               alt="Priya Sharma at her desk with a laptop"
               width="1254" height="1254"
               fetchPriority="high"
               className="w-full h-full object-cover"
-              style={{ objectPosition: '55% 30%' }}
+              style={{ objectPosition: '50% 35%' }}
             />
           </div>
         </motion.figure>
