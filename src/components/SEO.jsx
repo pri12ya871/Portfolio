@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
 const DEFAULT = {
-  title: 'Priya Sharma — Software Engineer & Frontend Developer',
+  title: 'Priya Sharma — Software Engineer',
   description:
     'Portfolio of Priya Sharma — B.Tech CSE graduate specializing in React, Node.js, full-stack development, AI integration, and open-source contributions.',
   keywords:
     'Priya Sharma, Software Engineer, Frontend Developer, Full Stack Developer, React, Node.js, Portfolio, SDE, KubeStellar',
-  url: 'https://priyasharma.dev',
+  url: 'https://priyasharma.vercel.app',
   image: '/og-image.png',
 };
 

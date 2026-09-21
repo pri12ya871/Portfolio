@@ -1,9 +1,6 @@
 import { Component } from 'react';
 
-/**
- * React error boundary — catches render-time JS errors and shows
- * an elegant fallback rather than a blank screen.
- */
+/** Catches render-time errors and shows a plain fallback instead of a blank screen. */
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -22,44 +19,18 @@ export default class ErrorBoundary extends Component {
     if (!this.state.hasError) return this.props.children;
 
     return (
-      <div
-        style={{
-          minHeight: '100vh',
-          background: '#050816',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '2rem',
-          fontFamily: 'Inter, sans-serif',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ fontSize: 64, marginBottom: 16 }}>⚠️</div>
-        <h1 style={{ color: '#F1F5F9', fontSize: 28, fontWeight: 800, marginBottom: 12, fontFamily: 'Sora, sans-serif' }}>
-          Something went wrong
-        </h1>
-        <p style={{ color: '#64748B', fontSize: 14, maxWidth: 400, lineHeight: 1.7, marginBottom: 28 }}>
-          An unexpected error occurred. Please refresh the page or try again later.
+      <div className="wrap min-h-screen flex flex-col justify-center py-24">
+        <h1 style={{ fontSize: 'clamp(2.5rem, 7vw, 4.5rem)' }}>Something went wrong.</h1>
+        <p className="mt-5 max-w-md" style={{ color: 'var(--ink-3)' }}>
+          An unexpected error stopped the page from loading. A refresh usually fixes it.
         </p>
-        <button
-          onClick={() => window.location.reload()}
-          style={{
-            padding: '12px 28px',
-            borderRadius: 12,
-            background: 'linear-gradient(135deg, #2563EB, #06B6D4)',
-            color: '#fff',
-            fontWeight: 700,
-            fontSize: 14,
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(37,99,235,0.4)',
-          }}
-        >
-          Refresh Page
-        </button>
+        <p className="mt-8">
+          <button type="button" className="btn btn-solid" onClick={() => window.location.reload()}>
+            Refresh the page
+          </button>
+        </p>
         {import.meta.env.DEV && this.state.error && (
-          <pre style={{ marginTop: 24, color: '#EF4444', fontSize: 11, textAlign: 'left', maxWidth: 600, overflow: 'auto' }}>
+          <pre className="mt-8 mono" style={{ color: 'var(--err)', whiteSpace: 'pre-wrap' }}>
             {this.state.error.toString()}
           </pre>
         )}

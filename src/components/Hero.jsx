@@ -1,453 +1,73 @@
-import { useRef, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
-import { HiDownload, HiMail } from 'react-icons/hi';
-import { BsFillGrid3X3GapFill } from 'react-icons/bs';
-import GirlCoding from './GirlCoding';
+import { ArrowDown, Download } from './Icons';
 
-/* ─────────────────────────────────────────
-   KEYWORD HIGHLIGHT
-───────────────────────────────────────── */
-const KEYWORDS = ['React', 'Software Engineer', 'AI', 'Blockchain', 'UpSpire', 'REST APIs', 'Frontend'];
-
-function highlightKeywords(text) {
-  const parts = [];
-  let remaining = text;
-  let key = 0;
-
-  while (remaining.length > 0) {
-    let earliest = -1;
-    let matchedKw = null;
-
-    for (const kw of KEYWORDS) {
-      const idx = remaining.indexOf(kw);
-      if (idx !== -1 && (earliest === -1 || idx < earliest)) {
-        earliest = idx;
-        matchedKw = kw;
-      }
-    }
-
-    if (earliest === -1) {
-      parts.push(<span key={key++}>{remaining}</span>);
-      break;
-    }
-    if (earliest > 0) parts.push(<span key={key++}>{remaining.slice(0, earliest)}</span>);
-
-    parts.push(
-      <span
-        key={key++}
-        className="font-semibold"
-        style={{
-          background: 'linear-gradient(135deg,#06B6D4,#2563EB)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          filter: 'drop-shadow(0 0 6px rgba(6,182,212,0.35))',
-        }}
-      >
-        {matchedKw}
-      </span>
-    );
-
-    remaining = remaining.slice(earliest + matchedKw.length);
-  }
-  return parts;
-}
-
-/* ─────────────────────────────────────────
-   FULL INTRODUCTION PARAGRAPHS
-───────────────────────────────────────── */
-const PARAGRAPHS = [
-  `Hello, I'm Priya Sharma, a passionate software developer and B.Tech graduate in Computer Science Engineering from Graphic Era Hill University, Dehradun. I have a strong interest in frontend engineering, AI, cybersecurity, and building real-world applications that make a meaningful impact.`,
-  `I have hands-on experience building responsive full-stack web applications using React, Node.js, JavaScript, and integrating REST APIs. I have also worked with Python, Firebase, Blockchain, and AI-based solutions across academic and personal projects, developing a broad and practical understanding of modern software development.`,
-  `One of my key achievements is building UpSpire — an AI-powered student learning platform — and contributing to the KubeStellar open-source project on GitHub. I enjoy solving challenging problems, collaborating with teams, and delivering polished software under tight deadlines.`,
-  `I am currently seeking opportunities as a Software Engineer or Frontend Developer where I can continue growing, contribute meaningfully to impactful products, and work alongside experienced professionals in a collaborative environment.`,
+/* Quick facts a recruiter scans for — plain text, nothing here pretends to be clickable. */
+const FACTS = [
+  { k: 'Status',      v: 'Open to SDE, frontend and full-stack roles' },
+  { k: 'Education',   v: 'B.Tech CSE, Graphic Era Hill University' },
+  { k: 'Open source', v: 'Contributor to KubeStellar' },
+  { k: 'Based in',    v: 'India' },
 ];
 
-/* ─────────────────────────────────────────
-   SOCIAL LINKS
-───────────────────────────────────────── */
-const SOCIAL = [
-  { icon: FiLinkedin, label: 'LinkedIn',  href: 'https://www.linkedin.com/in/priya-sharma-a65902253/', color: '#0A66C2' },
-  { icon: FiGithub,   label: 'GitHub',    href: 'https://github.com/pri12ya871',                       color: '#E6EDF3' },
-  { icon: FiTwitter,  label: 'X',         href: 'https://x.com/PriyaNautiyal11',                       color: '#1D9BF0' },
-];
+const rise = (delay) => ({
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+});
 
-/* ─────────────────────────────────────────
-   BACKGROUND PARTICLES — memo so they
-   don't regenerate on every render
-───────────────────────────────────────── */
-function Particles() {
-  const list = useMemo(() =>
-    Array.from({ length: 40 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 0.5,
-      dur: Math.random() * 8 + 5,
-      delay: Math.random() * 4,
-      op: Math.random() * 0.35 + 0.1,
-    })), []
-  );
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {list.map(p => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full"
-          style={{
-            left: `${p.x}%`, top: `${p.y}%`,
-            width: p.size, height: p.size,
-            background: p.id % 3 === 0 ? '#2563EB' : p.id % 3 === 1 ? '#06B6D4' : '#7C3AED',
-            opacity: p.op,
-          }}
-          animate={{ y: [-12, 12, -12], x: [-6, 6, -6], opacity: [p.op * 0.4, p.op, p.op * 0.4] }}
-          transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: 'easeInOut' }}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────
-   GRID LINES
-───────────────────────────────────────── */
-function GridLines() {
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute inset-0 pointer-events-none"
-      style={{
-        opacity: 0.025,
-        backgroundImage: `
-          linear-gradient(rgba(37,99,235,0.6) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(37,99,235,0.6) 1px, transparent 1px)
-        `,
-        backgroundSize: '64px 64px',
-      }}
-    />
-  );
-}
-
-/* ─────────────────────────────────────────
-   CTA BUTTON with ripple
-───────────────────────────────────────── */
-function CTAButton({ children, href, variant = 'primary', icon }) {
-  const [ripples, setRipples] = useState([]);
-  const ref = useRef(null);
-
-  const addRipple = e => {
-    const rect = ref.current.getBoundingClientRect();
-    const id = Date.now();
-    setRipples(r => [...r, { id, x: e.clientX - rect.left, y: e.clientY - rect.top }]);
-    setTimeout(() => setRipples(r => r.filter(rp => rp.id !== id)), 900);
-  };
-
-  const styles = {
-    primary: {
-      background: 'linear-gradient(135deg,#2563EB,#06B6D4)',
-      color: '#fff',
-      boxShadow: '0 4px 20px rgba(37,99,235,0.38)',
-      border: 'none',
-    },
-    secondary: {
-      background: 'rgba(255,255,255,0.07)',
-      color: '#F1F5F9',
-      border: '1px solid rgba(255,255,255,0.12)',
-    },
-    outline: {
-      background: 'transparent',
-      color: '#06B6D4',
-      border: '1px solid rgba(6,182,212,0.45)',
-    },
-  };
-
-  return (
-    <motion.a
-      ref={ref}
-      href={href}
-      target={href?.startsWith('http') ? '_blank' : undefined}
-      rel="noopener noreferrer"
-      onMouseDown={addRipple}
-      whileHover={{ scale: 1.05, y: -2 }}
-      whileTap={{ scale: 0.96 }}
-      className="relative flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm overflow-hidden select-none"
-      style={{ fontFamily: 'Inter', textDecoration: 'none', ...styles[variant] }}
-      onMouseEnter={e => {
-        if (variant === 'primary') e.currentTarget.style.boxShadow = '0 8px 32px rgba(37,99,235,0.55)';
-      }}
-      onMouseLeave={e => {
-        if (variant === 'primary') e.currentTarget.style.boxShadow = '0 4px 20px rgba(37,99,235,0.38)';
-      }}
-    >
-      {icon && <span className="text-sm">{icon}</span>}
-      {children}
-      {ripples.map(r => (
-        <span
-          key={r.id}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            left: r.x - 12, top: r.y - 12,
-            width: 24, height: 24,
-            background: 'rgba(255,255,255,0.28)',
-            animation: 'ripple 0.85s ease-out forwards',
-          }}
-        />
-      ))}
-    </motion.a>
-  );
-}
-
-/* ─────────────────────────────────────────
-   HERO VISUAL
-   • Simple static round frame — no rings,
-     no floating, no tilt
-   • Animated girl-coding illustration inside
-───────────────────────────────────────── */
-function HeroImage() {
-  const S = 'clamp(280px, 30vw, 400px)';
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      style={{
-        width: S,
-        height: S,
-        flexShrink: 0,
-        borderRadius: '50%',
-        padding: 4,
-        background: 'linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #7C3AED 100%)',
-        boxShadow: '0 20px 60px rgba(124,58,237,0.35), 0 0 50px rgba(168,85,247,0.15)',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          borderRadius: '50%',
-          overflow: 'hidden',
-          background: '#12081F',
-        }}
-      >
-        <GirlCoding />
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─────────────────────────────────────────
-   HERO SECTION
-   Layout: image LEFT (desktop), text RIGHT
-   On mobile: image on top, text below
-───────────────────────────────────────── */
 export default function Hero() {
   return (
-    <div
-      className="relative min-h-screen flex flex-col overflow-hidden"
-      style={{ background: '#050816' }}
-    >
-      <GridLines />
-      <Particles />
-
-      {/* Background ambient blobs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <motion.div
-          animate={{ scale: [1, 1.18, 1], x: [0, 35, 0], y: [0, -25, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-[0.09]"
-          style={{ background: 'radial-gradient(circle, #2563EB, transparent 70%)' }}
+    <div className="wrap pt-32 sm:pt-40 pb-20 sm:pb-28">
+      <motion.p className="eyebrow" {...rise(0)}>
+        <span
+          aria-hidden="true"
+          className="inline-block w-2 h-2 rounded-full self-center"
+          style={{ background: 'var(--ok)', boxShadow: '0 0 0 4px rgba(47,107,58,.15)' }}
         />
-        <motion.div
-          animate={{ scale: [1, 1.25, 1], x: [0, -30, 0], y: [0, 35, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute -bottom-40 -right-40 w-[560px] h-[560px] rounded-full blur-3xl opacity-[0.08]"
-          style={{ background: 'radial-gradient(circle, #06B6D4, transparent 70%)' }}
-        />
-      </div>
+        <span>Available for work — 2026</span>
+      </motion.p>
 
-      {/* ── Main content ── */}
-      <div className="relative z-10 flex-1 flex items-center">
-        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 pb-12">
-
-          {/*
-            DESKTOP: text LEFT | illustration RIGHT
-            MOBILE:  intro text FIRST, illustration below
-          */}
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14 min-h-[calc(100vh-9rem)]">
-
-            {/* ── TEXT — left on desktop, FIRST on mobile ── */}
-            <div className="flex-1 flex flex-col justify-center order-1">
-
-              {/* Status badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.05 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 self-start"
-                style={{ background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.28)' }}
-              >
-                <motion.div
-                  animate={{ opacity: [1, 0.25, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-2 h-2 rounded-full flex-shrink-0"
-                  style={{ background: '#06B6D4' }}
-                />
-                <span className="text-xs font-medium" style={{ color: '#06B6D4', fontFamily: 'Inter' }}>
-                  Open to Work · SDE / Frontend / Full Stack
-                </span>
-              </motion.div>
-
-              {/* Heading */}
-              <motion.h1
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.12 }}
-                className="font-black leading-tight mb-3"
-                style={{ fontFamily: 'Sora, sans-serif', fontSize: 'clamp(2.6rem, 5vw, 4rem)' }}
-              >
-                <span className="text-white">Hello, I'm</span>
-                <br />
-                <span
-                  style={{
-                    background: 'linear-gradient(135deg, #fff 0%, #06B6D4 45%, #2563EB 100%)',
-                    backgroundSize: '200% 200%',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    animation: 'gradientShift 5s ease infinite',
-                  }}
-                >
-                  Priya Sharma
-                </span>
-              </motion.h1>
-
-              {/* Subtitle pill */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.22 }}
-                className="flex flex-wrap items-center gap-2 mb-7"
-              >
-                <span className="text-base font-medium" style={{ color: '#94A3B8', fontFamily: 'Inter' }}>
-                  B.Tech Graduate in
-                </span>
-                <span
-                  className="px-3 py-1 rounded-lg text-base font-semibold"
-                  style={{
-                    background: 'rgba(37,99,235,0.14)',
-                    border: '1px solid rgba(37,99,235,0.3)',
-                    color: '#93C5FD',
-                    fontFamily: 'Sora',
-                  }}
-                >
-                  Computer Science Engineering
-                </span>
-              </motion.div>
-
-              {/* Full paragraphs */}
-              <div className="space-y-4 mb-9">
-                {PARAGRAPHS.map((para, i) => (
-                  <motion.p
-                    key={i}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-                    className="text-base leading-relaxed"
-                    style={{ color: '#94A3B8', fontFamily: 'Inter', lineHeight: 1.8 }}
-                  >
-                    {highlightKeywords(para)}
-                  </motion.p>
-                ))}
-              </div>
-
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.6 }}
-                className="flex flex-wrap gap-3 mb-8"
-              >
-                <CTAButton href="/Priya_Sharma_Resume.pdf" variant="primary" icon={<HiDownload />}>
-                  Download Resume
-                </CTAButton>
-                <CTAButton href="#contact" variant="secondary" icon={<HiMail />}>
-                  Contact Me
-                </CTAButton>
-                <CTAButton href="#projects" variant="outline" icon={<BsFillGrid3X3GapFill />}>
-                  View Projects
-                </CTAButton>
-              </motion.div>
-
-              {/* Social icons */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.55, delay: 0.72 }}
-                className="flex items-center gap-3"
-              >
-                <span className="text-xs" style={{ color: '#475569', fontFamily: 'Inter' }}>Find me on</span>
-                <div className="w-6 h-px" style={{ background: 'rgba(255,255,255,0.1)' }} />
-                <div className="flex items-center gap-2">
-                  {SOCIAL.map(({ icon: Icon, label, href, color }) => (
-                    <motion.a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      whileHover={{ scale: 1.18, y: -3 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="w-9 h-9 rounded-xl flex items-center justify-center"
-                      style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.background = `${color}1e`;
-                        e.currentTarget.style.borderColor = `${color}44`;
-                        e.currentTarget.style.boxShadow = `0 0 18px ${color}40`;
-                        e.currentTarget.querySelector('svg').style.color = color;
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                        e.currentTarget.style.boxShadow = 'none';
-                        e.currentTarget.querySelector('svg').style.color = '#94A3B8';
-                      }}
-                    >
-                      <Icon className="text-base" style={{ color: '#94A3B8', transition: 'color 0.2s' }} />
-                    </motion.a>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* ── ILLUSTRATION — right on desktop, after text on mobile ── */}
-            <div className="flex-shrink-0 flex items-center justify-center order-2">
-              <HeroImage />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+      <motion.h1
+        className="mt-6"
+        style={{ fontSize: 'clamp(3.25rem, 11vw, 8.5rem)', lineHeight: 0.95, letterSpacing: '-0.035em' }}
+        {...rise(0.06)}
       >
-        <span className="text-[10px] tracking-[0.25em] uppercase" style={{ color: '#334155', fontFamily: 'Inter' }}>
-          Scroll
-        </span>
-        <div className="w-px h-10 relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-          <motion.div
-            className="absolute top-0 left-0 w-full"
-            style={{ background: 'linear-gradient(180deg,#2563EB,#06B6D4)', height: '40%' }}
-            animate={{ y: ['0%', '260%'] }}
-            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-          />
+        Priya Sharma
+      </motion.h1>
+
+      <div className="mt-10 sm:mt-14 grid gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-20">
+        <div>
+          <motion.p
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', lineHeight: 1.3, color: 'var(--ink)' }}
+            {...rise(0.14)}
+          >
+            Software engineer building full-stack web applications with React and Node.js — with a
+            soft spot for <em style={{ color: 'var(--accent)' }}>AI</em>, security and open source.
+          </motion.p>
+
+          <motion.div className="mt-10 flex flex-wrap gap-3" {...rise(0.22)}>
+            <a href="#projects" className="btn btn-solid">
+              See selected work <ArrowDown size={17} />
+            </a>
+            <a href="/Priya_Sharma_Resume.pdf" download className="btn btn-line">
+              <Download size={17} /> Résumé (PDF)
+            </a>
+          </motion.div>
         </div>
-      </motion.div>
+
+        <motion.dl className="m-0 self-end" {...rise(0.3)}>
+          {FACTS.map(({ k, v }) => (
+            <div
+              key={k}
+              className="grid grid-cols-[112px_1fr] gap-4 py-3"
+              style={{ borderTop: '1px solid var(--rule)' }}
+            >
+              <dt className="mono" style={{ color: 'var(--ink-3)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '.08em', paddingTop: 3 }}>{k}</dt>
+              <dd className="m-0" style={{ color: 'var(--ink)' }}>{v}</dd>
+            </div>
+          ))}
+        </motion.dl>
+      </div>
     </div>
   );
 }
