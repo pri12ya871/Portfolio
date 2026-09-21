@@ -34,33 +34,6 @@ function Scribble({ children }) {
   );
 }
 
-/* Circular "open to work" stamp — text set on a circle path, slowly rotating */
-function Stamp() {
-  // Circle r=44 → circumference ≈ 276.5; textLength stretches the string to exactly one lap.
-  const text = 'OPEN TO WORK • SDE • FULL-STACK • ';
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute -left-6 -top-6 sm:-left-10 sm:-top-10 w-[104px] h-[104px] sm:w-[124px] sm:h-[124px] rounded-full flex items-center justify-center"
-      style={{ background: 'var(--paper)', border: '1.5px solid var(--ink)', zIndex: 2 }}
-    >
-      <svg viewBox="0 0 120 120" className="stamp absolute inset-0 w-full h-full">
-        <defs>
-          <path id="stamp-circle" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
-        </defs>
-        <text style={{ fontFamily: 'var(--font-mono)', fontSize: 9.4, letterSpacing: 1.6, fill: 'var(--ink)' }}>
-          <textPath href="#stamp-circle" textLength="274" lengthAdjust="spacing">{text}</textPath>
-        </text>
-      </svg>
-      <span className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: 'var(--accent)', color: 'var(--paper)' }}>
-        <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor">
-          <path d="M10 1.5l1.9 5.2 5.6.2-4.4 3.4 1.6 5.4L10 12.6l-4.7 3.1 1.6-5.4L2.5 6.9l5.6-.2z" />
-        </svg>
-      </span>
-    </div>
-  );
-}
-
 export default function Hero() {
   return (
     <div className="wrap pt-28 sm:pt-36 pb-16 sm:pb-24">
@@ -109,7 +82,6 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0, rotate: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Stamp />
           <div className="portrait" style={{ aspectRatio: '4 / 5' }}>
             <img
               src={portrait}
@@ -120,10 +92,6 @@ export default function Hero() {
               style={{ objectPosition: '55% 30%' }}
             />
           </div>
-          <figcaption className="mono mt-5 flex items-center justify-between" style={{ color: 'var(--ink-3)', fontSize: 12 }}>
-            <span>FIG. 01 — PRIYA</span>
-            <span>B.TECH CSE · GEHU</span>
-          </figcaption>
         </motion.figure>
       </div>
 

@@ -179,10 +179,6 @@
     box-shadow: 14px 14px 0 var(--accent-soft);
   }
 
-  /* Rotating "open to work" stamp */
-  .stamp { animation: stamp-spin 22s linear infinite; }
-  @keyframes stamp-spin { to { transform: rotate(360deg); } }
-
   /* Tech ticker */
   .ticker-track {
     display: flex;
@@ -193,7 +189,7 @@
   @keyframes ticker { to { transform: translateX(-50%); } }
 
   @media (prefers-reduced-motion: reduce) {
-    .stamp, .ticker-track { animation: none; }
+    .ticker-track { animation: none; }
   }
 
   /* Project rows light up as a whole on hover */
