@@ -14,7 +14,7 @@ const GROUPS = [
 
 export default function TechnicalSkills() {
   return (
-    <div className="section">
+    <div className="section on-ink" style={{ borderTop: 0 }}>
       <div className="wrap">
         <SectionHeader
           id="skills-title"

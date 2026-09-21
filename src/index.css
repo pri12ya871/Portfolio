@@ -158,6 +158,50 @@
     color: var(--ink-3);
   }
 
+  /* Dark band: re-point the tokens so every child component inverts for free */
+  .on-ink {
+    --ink:    #F3EFE6;
+    --ink-2:  rgba(243, 239, 230, .82);
+    --ink-3:  rgba(243, 239, 230, .58);
+    --rule:   rgba(243, 239, 230, .16);
+    --accent: #F0743E;
+    background: #17140F;
+    color: var(--ink-2);
+  }
+
+  /* Portrait card: ink hairline + offset block shadow, like a pinned print */
+  .portrait {
+    position: relative;
+    border: 1.5px solid var(--ink);
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--paper-3);
+    box-shadow: 14px 14px 0 var(--accent-soft);
+  }
+
+  /* Rotating "open to work" stamp */
+  .stamp { animation: stamp-spin 22s linear infinite; }
+  @keyframes stamp-spin { to { transform: rotate(360deg); } }
+
+  /* Tech ticker */
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 48s linear infinite;
+  }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stamp, .ticker-track { animation: none; }
+  }
+
+  /* Project rows light up as a whole on hover */
+  .proj-row { transition: background-color .25s ease; }
+  .proj-row:hover { background: var(--paper-2); }
+  .proj-row:hover .proj-num { transform: translateX(4px); }
+  .proj-num { transition: transform .25s ease; }
+
   .field {
     width: 100%;
     background: var(--paper);

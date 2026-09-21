@@ -4,6 +4,7 @@ import ErrorBoundary   from './components/ErrorBoundary';
 import SEO             from './components/SEO';
 import Navbar          from './components/Navbar';
 import Hero            from './components/Hero';
+import Ticker          from './components/Ticker';
 import About           from './components/About';
 import TechnicalSkills from './components/TechnicalSkills';
 import Projects        from './components/Projects';
@@ -24,6 +25,7 @@ export default function App() {
         <Navbar />
         <main id="main-content">
           <section id="home"           aria-label="Introduction"><Hero /></section>
+          <Ticker />
           <section id="about"          aria-labelledby="about-title"><About /></section>
           <section id="skills"         aria-labelledby="skills-title"><TechnicalSkills /></section>
           <section id="projects"       aria-labelledby="projects-title"><Projects /></section>

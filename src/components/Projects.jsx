@@ -57,11 +57,11 @@ function ProjectRow({ p, index }) {
   const detailsId = `project-${index}-details`;
 
   return (
-    <Reveal as="li" className="py-8 sm:py-10" style={{ borderTop: '1px solid var(--rule)' }}>
-      <div className="grid gap-4 md:grid-cols-[72px_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8">
+    <Reveal as="li" className="proj-row py-8 sm:py-10 px-4 -mx-4 sm:px-6 sm:-mx-6 rounded-xl" style={{ borderTop: '1px solid var(--rule)' }}>
+      <div className="grid gap-4 md:grid-cols-[88px_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8">
         <span
-          className="mono pt-2"
-          style={{ color: 'var(--accent)', fontSize: 14 }}
+          className="proj-num inline-block leading-none"
+          style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 'clamp(2.5rem, 4vw, 3.5rem)' }}
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, '0')}
