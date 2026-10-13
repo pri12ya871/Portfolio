@@ -15,49 +15,40 @@ const PROJECTS = [
     stack: ['Node.js', 'Claude API', 'transformers.js', 'Zod', 'node:test'],
   },
   {
-    title: 'ICON Store',
-    kind: 'Full-stack MERN application',
-    github: 'https://github.com/pri12ya871/Ecommerce-website',
-    description: 'A full-stack e-commerce platform where customers shop, sellers manage products, and administrators manage users, products and orders through role-based authentication.',
-    details: 'Built with React, Node.js, Express and MongoDB, with JWT authentication, bcrypt password hashing and a REST API between frontend and backend. Covers the complete e-commerce workflow: authentication, CRUD, cart and orders.',
-    features: ['Role-based access', 'Shopping cart', 'Order management', 'Admin & seller dashboards', 'Responsive UI'],
-    stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'bcrypt'],
+    title: 'LLM Gateway',
+    kind: 'AI infrastructure · LLM proxy',
+    github: 'https://github.com/pri12ya871/llm-gateway',
+    description: 'A proxy between applications and LLM providers that makes the traffic cheaper, faster and survivable: semantic caching, per-tenant budgets, circuit breaking with failover, bounded admission control and a live dashboard.',
+    details: 'In its own benchmark, the semantic cache cut cost by 83.6% and p50 latency from 319 ms to 25 ms. Under a saturating burst, shedding 57% of requests made the callers who were served 26% faster at p99. Two runtime dependencies, SQLite through node:sqlite, and a deterministic mock provider so it runs with no API keys. 67 tests.',
+    features: ['Semantic cache', 'Per-tenant budgets', 'Circuit breaking & failover', 'Load shedding', 'Live dashboard'],
+    stack: ['Node.js', 'Express', 'node:sqlite', 'node:test'],
   },
   {
-    title: 'CinderPeak',
-    kind: 'C++ graph library',
-    github: 'https://github.com/pri12ya871/Cinder-Peak',
-    description: 'A modular C++ graph-algorithm library with a clean API for BFS, DFS, Dijkstra and minimum spanning trees.',
-    details: 'Written in modern C++ with Google Test and GitHub Actions CI. Focuses on memory management, multithreading, unit testing and reusable architecture.',
-    features: ['Graph algorithms', 'OOP design', 'Unit-tested', 'CI pipeline'],
-    stack: ['C++', 'STL', 'Google Test', 'GitHub Actions'],
+    title: 'Raft KV',
+    kind: 'Distributed systems · consensus',
+    github: 'https://github.com/pri12ya871/raft-kv',
+    description: 'A distributed key-value store built on a from-scratch implementation of the Raft consensus algorithm, with leader election, log replication and linearizable reads. Zero dependencies: only the Node standard library.',
+    details: 'Measured on a laptop: replicated, fsynced writes at 5.77 ms p50, linearizable reads at 2.33 ms p50, and a median of 605 ms from kill -9 on the leader to serving writes again. A chaos run that randomly SIGKILLs nodes lost zero acknowledged writes. 18 consensus tests run against a virtual clock and a simulated network.',
+    features: ['Leader election', 'Log replication', 'Linearizable reads', 'Chaos testing', 'Deterministic tests'],
+    stack: ['Node.js', 'TCP', 'Raft', 'node:test'],
   },
   {
-    title: 'CSE Assist',
-    kind: 'Chatbot',
-    github: 'https://github.com/pri12ya871/chat-bot-cse-dept',
-    description: 'A chatbot that answers computer-science questions in real time using NLP pattern matching over a structured knowledge base.',
-    details: 'Backend logic in JavaScript and Python, with a JSON knowledge base designed to be extended without code changes.',
-    features: ['NLP pattern matching', 'Knowledge-base design', 'API integration'],
-    stack: ['Python', 'JavaScript', 'Node.js', 'JSON'],
+    title: 'Auth Service',
+    kind: 'Backend · authentication',
+    github: 'https://github.com/pri12ya871/auth-service',
+    description: 'A JWT authentication service with refresh-token rotation and reuse detection: replaying a rotated refresh token revokes that user\'s whole token family.',
+    details: 'scrypt password hashing, SHA-256 hashed refresh tokens, role-based access control and rate limiting. Login takes the same time for an unknown email as for a wrong password, so it does not leak which accounts exist. One runtime dependency (Express); the database, hashing, JWT signing and test runner all ship with Node. 43 tests.',
+    features: ['Refresh-token rotation', 'Reuse detection', 'RBAC', 'Rate limiting', 'Timing-safe login'],
+    stack: ['Node.js', 'Express', 'JWT', 'node:sqlite', 'node:crypto'],
   },
   {
-    title: 'P2P File Sync',
-    kind: 'Distributed systems · open source',
-    github: 'https://github.com/OpenTechTools/p2p-file-sync-and-collab',
-    description: 'A decentralised peer-to-peer version-control system that lets several users collaborate securely without a central server.',
-    details: 'Uses a Merkle DAG for content-addressable storage, a CRDT (LWW set) for conflict-free merging, SHA-256 for integrity and signed commits, and Kademlia-style DHT concepts for peer discovery.',
-    features: ['Merkle DAG', 'CRDTs', 'Signed commits', 'P2P networking'],
-    stack: ['React.js', 'FastAPI', 'Python', 'SHA-256'],
-  },
-  {
-    title: 'UpSpire',
-    kind: 'AI learning platform · hackathon',
-    github: 'https://github.com/pri12ya871/UpSpire',
-    description: 'A student learning and career platform: portfolio builder, an "AI Professor" for doubt resolution, academic analytics and mentor sessions in one place.',
-    details: 'Built in 24 hours at the Masters\' Union hackathon, where the team placed in the top 30. Combines AI features, authentication, dashboards and real-time data with Firebase.',
-    features: ['AI Professor', 'Portfolio builder', 'Analytics dashboard', 'Real-time database'],
-    stack: ['React.js', 'JavaScript', 'Firebase'],
+    title: 'Chat API',
+    kind: 'Real-time backend · WebSockets',
+    github: 'https://github.com/pri12ya871/chat-api',
+    description: 'A real-time chat server with rooms, presence, typing indicators and message history, over a WebSocket protocol written from scratch, with no ws and no socket.io.',
+    details: 'Implements the handshake, frame codec, fragmentation, ping/pong and closing handshake, plus per-connection flood limits. Two real bugs found by running it are documented and covered by regression tests: half-open sockets leaving ghost room members, and bytes past the upgrade headers being dropped. 58 tests, including a separate WebSocket client written for the tests.',
+    features: ['WebSocket protocol from scratch', 'Rooms & presence', 'Typing indicators', 'Flood limits', 'Message history'],
+    stack: ['Node.js', 'Express', 'WebSockets', 'node:test'],
   },
 ];
 
@@ -143,7 +134,7 @@ export default function Projects() {
           num="03"
           label="Work"
           title={<>Selected <em>work</em></>}
-          intro="Six projects across full-stack, systems and AI. Each links straight to its source."
+          intro="Five projects across AI, distributed systems and backend. Each links straight to its source."
         />
 
         <ol className="list-none m-0 p-0" style={{ borderBottom: '1px solid var(--rule)' }}>
