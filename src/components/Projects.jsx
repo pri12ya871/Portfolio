@@ -6,6 +6,15 @@ import { ArrowOut, Plus, Minus } from './Icons';
 
 const PROJECTS = [
   {
+    title: 'Yojana Agent',
+    kind: 'AI agent · government schemes',
+    github: 'https://github.com/pri12ya871/yojana-agent',
+    description: 'An agent that tells people which Indian government schemes they may qualify for, and why. Claude turns official guidelines into rules, but the yes/no answer always comes from plain code, citing the exact sentence in the government document.',
+    details: 'Every rule the LLM extracts must pass four checks against a saved copy of the source: the quote appears word for word, its numbers and limit directions match, and a local NLI model confirms the quote supports the rule. A three-valued rule engine decides from partial answers, asks only the questions that can still change a result, and says "confirm with the office" rather than guess. A Hinglish-aware chat layer runs offline, and 60 tests include property tests over random rule sets.',
+    features: ['Verified LLM rule extraction', 'Cited answers', 'Three-valued rule engine', 'Next-question picker', 'Runs without an API key'],
+    stack: ['Node.js', 'Claude API', 'transformers.js', 'Zod', 'node:test'],
+  },
+  {
     title: 'ICON Store',
     kind: 'Full-stack MERN application',
     github: 'https://github.com/pri12ya871/Ecommerce-website',
@@ -134,7 +143,7 @@ export default function Projects() {
           num="03"
           label="Work"
           title={<>Selected <em>work</em></>}
-          intro="Five projects across full-stack, systems and AI. Each links straight to its source."
+          intro="Six projects across full-stack, systems and AI. Each links straight to its source."
         />
 
         <ol className="list-none m-0 p-0" style={{ borderBottom: '1px solid var(--rule)' }}>
