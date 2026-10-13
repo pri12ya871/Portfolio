@@ -15,24 +15,6 @@ const PROJECTS = [
     stack: ['Node.js', 'Claude API', 'transformers.js', 'Zod', 'node:test'],
   },
   {
-    title: 'LLM Gateway',
-    kind: 'AI infrastructure · LLM proxy',
-    github: 'https://github.com/pri12ya871/llm-gateway',
-    description: 'A proxy between applications and LLM providers that makes the traffic cheaper, faster and survivable: semantic caching, per-tenant budgets, circuit breaking with failover, bounded admission control and a live dashboard.',
-    details: 'In its own benchmark, the semantic cache cut cost by 83.6% and p50 latency from 319 ms to 25 ms. Under a saturating burst, shedding 57% of requests made the callers who were served 26% faster at p99. Two runtime dependencies, SQLite through node:sqlite, and a deterministic mock provider so it runs with no API keys. 67 tests.',
-    features: ['Semantic cache', 'Per-tenant budgets', 'Circuit breaking & failover', 'Load shedding', 'Live dashboard'],
-    stack: ['Node.js', 'Express', 'node:sqlite', 'node:test'],
-  },
-  {
-    title: 'Raft KV',
-    kind: 'Distributed systems · consensus',
-    github: 'https://github.com/pri12ya871/raft-kv',
-    description: 'A distributed key-value store built on a from-scratch implementation of the Raft consensus algorithm, with leader election, log replication and linearizable reads. Zero dependencies: only the Node standard library.',
-    details: 'Measured on a laptop: replicated, fsynced writes at 5.77 ms p50, linearizable reads at 2.33 ms p50, and a median of 605 ms from kill -9 on the leader to serving writes again. A chaos run that randomly SIGKILLs nodes lost zero acknowledged writes. 18 consensus tests run against a virtual clock and a simulated network.',
-    features: ['Leader election', 'Log replication', 'Linearizable reads', 'Chaos testing', 'Deterministic tests'],
-    stack: ['Node.js', 'TCP', 'Raft', 'node:test'],
-  },
-  {
     title: 'Auth Service',
     kind: 'Backend · authentication',
     github: 'https://github.com/pri12ya871/auth-service',
@@ -134,7 +116,7 @@ export default function Projects() {
           num="03"
           label="Work"
           title={<>Selected <em>work</em></>}
-          intro="Five projects across AI, distributed systems and backend. Each links straight to its source."
+          intro="Three projects across AI and backend. Each links straight to its source."
         />
 
         <ol className="list-none m-0 p-0" style={{ borderBottom: '1px solid var(--rule)' }}>
