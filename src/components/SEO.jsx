@@ -5,7 +5,7 @@ const DEFAULT = {
   description:
     'Portfolio of Priya Sharma — B.Tech CSE graduate specializing in React, Node.js, full-stack development, AI integration, and open-source contributions.',
   keywords:
-    'Priya Sharma, Software Engineer, Frontend Developer, Full Stack Developer, React, Node.js, Portfolio, SDE, KubeStellar',
+    'Priya Sharma, Software Engineer, Frontend Developer, Full Stack Developer, React, Node.js, Portfolio, SDE, KubeStellar, tRPC, TypeORM',
   url: 'https://priyasharma.vercel.app',
   image: '/og-image.png',
 };

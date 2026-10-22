@@ -6,7 +6,7 @@ import portrait from '../assets/portrait.webp';
 const FACTS = [
   { k: 'Status',      v: 'Open to SDE, frontend and full-stack roles' },
   { k: 'Education',   v: 'B.Tech CSE, Graphic Era Hill University' },
-  { k: 'Open source', v: 'Contributor to KubeStellar' },
+  { k: 'Open source', v: 'Merged PRs in tRPC and TypeORM' },
   { k: 'Based in',    v: 'India' },
 ];
 

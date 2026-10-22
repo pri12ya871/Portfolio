@@ -24,7 +24,8 @@ export default function About() {
             </p>
             <p>
               One of my key achievements is building UpSpire — an AI-powered student learning platform —
-              and contributing to the KubeStellar open-source project. I enjoy solving hard problems,
+              and getting bug fixes merged into tRPC and TypeORM, alongside contributing to KubeStellar.
+              I enjoy solving hard problems,
               collaborating with teams, and shipping polished software under tight deadlines.
             </p>
             <p>
