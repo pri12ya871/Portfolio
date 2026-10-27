@@ -4,6 +4,19 @@ import { ArrowOut } from './Icons';
 
 const ENTRIES = [
   {
+    name: 'Naamin',
+    role: 'Full-Stack Web Developer (Freelance) · Jan – Apr 2026',
+    tag: 'Live baby-name discovery website · Remote',
+    link: { href: 'https://naamin.com', label: 'naamin.com' },
+    bullets: [
+      'Shipped full-stack features for naamin.com over a 4-month collaboration with the founder, turning product requirements into production pages.',
+      'Powered name search with 3 filters (gender, starting letter, popularity) and 2 user features (wishlists, saved shortlists) by querying Supabase through its JavaScript client.',
+      'Updated pages across a product with 10+ name tools, user accounts and 22-language support, including Name Finder, Nickname Finder and a Name Report with PDF download.',
+      'Resolved UI and functional issues across desktop and mobile browsers, iterating on the founder\'s feedback.',
+    ],
+    stack: 'Next.js  /  React.js  /  Supabase',
+  },
+  {
     name: 'tRPC',
     role: 'Merged pull request · Oct 2026',
     tag: 'End-to-end typesafe APIs for TypeScript',
@@ -33,9 +46,8 @@ const ENTRIES = [
     tag: 'CNCF sandbox project · multi-cluster Kubernetes',
     link: { href: 'https://github.com/pri12ya871/kubestellar', label: 'My fork on GitHub' },
     bullets: [
-      'Resolved bugs in the KubeStellar codebase through GitHub pull requests, improving reliability and reducing reported issues.',
-      'Worked through code review with senior maintainers, integrating feedback to meet the project\'s engineering standards.',
-      'Used Git, Kubernetes, Docker and CI/CD pipelines in a distributed open-source environment.',
+      'Submitted a documentation fix to KubeStellar, a CNCF Sandbox project for multi-cluster Kubernetes configuration management.',
+      'The pull request was reviewed by maintainers and merged (Mar 2025).',
     ],
     stack: 'Git  /  Docker  /  Kubernetes  /  CI/CD  /  GitHub',
   },
@@ -45,7 +57,7 @@ export default function Experience() {
   return (
     <div className="section">
       <div className="wrap">
-        <SectionHeader id="experience-title" num="04" label="Experience" title={<>Open-source <em>work</em></>} />
+        <SectionHeader id="experience-title" num="04" label="Experience" title={<>Work &amp; <em>open source</em></>} />
 
         {ENTRIES.map((e, i) => (
           <Reveal
